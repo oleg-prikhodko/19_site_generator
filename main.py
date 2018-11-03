@@ -22,12 +22,18 @@ if __name__ == "__main__":
         html_content = markdown2.markdown(md_content)
 
         environment = Environment(loader=FileSystemLoader("templates"))
-        template = environment.get_template("article.html")
-        template_stream = template.stream(
+        article_template = environment.get_template("article.html")
+        article_template_stream = article_template.stream(
             name=article_name, content=html_content
         )
         filename, _ = os.path.splitext(os.path.basename(article["source"]))
 
         if not os.path.exists("output"):
             os.mkdir("output")
-        template_stream.dump("output/{}.html".format(filename))
+        article_template_stream.dump("output/{}.html".format(filename))
+
+        article["url"] = "{}.html".format(filename)
+
+    index_template = environment.get_template('index.html')
+    index_template_stream = index_template.stream(articles=articles)
+    index_template_stream.dump("output/index.html")
