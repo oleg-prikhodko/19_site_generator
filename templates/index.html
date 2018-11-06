@@ -22,10 +22,10 @@
     <div class="container-fluid my-3">
         <ul>
             {% for topic in topics %}
-            <li><a href="#">{{ topic.title }}</a></li>
+            <li><a href="#">{{ topic.title|e }}</a></li>
             <ul>
                 {% for article in topic.articles %}
-                <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+                <li><a href="{{ article.url }}">{{ article.title|e }}</a></li>
                 {% endfor %}
             </ul>
             {% endfor %}
