@@ -15,7 +15,8 @@ def load_text_from_file(filepath):
 def make_site():
     json_config = json.loads(load_text_from_file("config.json"))
     articles = json_config["articles"]
-    topics = {topic["slug"]: topic["title"] for topic in json_config["topics"]}
+    topics = json_config["topics"]
+    topic_titles = {topic["slug"]: topic["title"] for topic in topics}
 
     for article in articles:
         md_path = "articles/{}".format(article["source"])
@@ -24,7 +25,7 @@ def make_site():
         filename, _ = os.path.splitext(os.path.basename(article["source"]))
 
         article["url"] = "{}.html".format(filename)
-        article["topic"] = topics.get(article["topic"])
+        article["topic"] = topic_titles.get(article["topic"])
 
         environment = Environment(loader=FileSystemLoader("templates"))
         article_template = environment.get_template("article.html")
@@ -36,8 +37,15 @@ def make_site():
             os.mkdir("output")
         article_template_stream.dump("output/{}.html".format(filename))
 
+    for topic in topics:
+        topic["articles"] = [
+            article
+            for article in articles
+            if article["topic"] == topic["title"]
+        ]
+
     index_template = environment.get_template("index.html")
-    index_template_stream = index_template.stream(articles=articles)
+    index_template_stream = index_template.stream(topics=topics)
     index_template_stream.dump("output/index.html")
 
 

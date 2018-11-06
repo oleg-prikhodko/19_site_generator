@@ -21,8 +21,13 @@
     
     <div class="container-fluid my-3">
         <ul>
-            {% for article in articles %}
-            <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+            {% for topic in topics %}
+            <li><a href="#">{{ topic.title }}</a></li>
+            <ul>
+                {% for article in topic.articles %}
+                <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+                {% endfor %}
+            </ul>
             {% endfor %}
         </ul>
     </div>
