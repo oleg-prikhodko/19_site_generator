@@ -10,7 +10,7 @@
         {{ topic.title|e }}
         <ul>
             {% for article in topic.articles %}
-            <li><a href="{{ article.url|e }}">{{ article.title|e }}</a></li>
+            <li><a href="{{ article.url|urlencode }}">{{ article.title|e }}</a></li>
             {% endfor %}
         </ul>
     </li>
