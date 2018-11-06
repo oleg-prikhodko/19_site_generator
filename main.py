@@ -22,9 +22,9 @@ def make_site():
     topic_titles = {topic["slug"]: topic["title"] for topic in topics}
 
     for article in articles:
-        md_path = "articles/{}".format(article["source"])
-        md_content = load_text_from_file(md_path)
-        html_content = markdown2.markdown(md_content)
+        markdown_path = "articles/{}".format(article["source"])
+        markdown_content = load_text_from_file(markdown_path)
+        html_content = markdown2.markdown(markdown_content)
         filename, _ = os.path.splitext(os.path.basename(article["source"]))
 
         article["url"] = "{}.html".format(filename)
