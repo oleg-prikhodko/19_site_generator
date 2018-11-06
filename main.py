@@ -6,6 +6,9 @@ from jinja2 import FileSystemLoader, Environment
 from livereload import Server
 
 
+OUTPUT_DIRNAME = "docs"
+
+
 def load_text_from_file(filepath):
     with open(filepath) as text_file:
         text = text_file.read()
@@ -33,9 +36,11 @@ def make_site():
             name=article["title"], topic=article["topic"], content=html_content
         )
 
-        if not os.path.exists("output"):
-            os.mkdir("output")
-        article_template_stream.dump("output/{}.html".format(filename))
+        if not os.path.exists(OUTPUT_DIRNAME):
+            os.mkdir(OUTPUT_DIRNAME)
+        article_template_stream.dump(
+            "{}/{}.html".format(OUTPUT_DIRNAME, filename)
+        )
 
     for topic in topics:
         topic["articles"] = [
@@ -46,10 +51,10 @@ def make_site():
 
     index_template = environment.get_template("index.html")
     index_template_stream = index_template.stream(topics=topics)
-    index_template_stream.dump("output/index.html")
+    index_template_stream.dump("{}/index.html".format(OUTPUT_DIRNAME))
 
 
 if __name__ == "__main__":
     server = Server()
     server.watch("templates/*.html", make_site)
-    server.serve(root="output/")
+    server.serve(root=OUTPUT_DIRNAME)
