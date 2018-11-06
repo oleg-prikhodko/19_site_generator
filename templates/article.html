@@ -8,12 +8,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-primary">
-        <a href="/index.html" class="navbar-brand">Энциклопедия Devman</a>
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+        <a href="#" class="navbar-brand">Энциклопедия Devman</a>
+        <div class="mr-auto clearfix">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb d-inline-flex bg-transparent white-text my-0 py-0">
+                    <li class="breadcrumb-item"><a href="/index.html">Главная</a></li>
+                    <li class="breadcrumb-item"><a href="#">{{ topic }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ name }}</li>
+                </ol>
+            </nav>
+        </div>
     </nav>
 
     <div class="container-fluid my-3">
-        <h1>{{ topic }}</h1>
         {{ content }}
     </div>
 
