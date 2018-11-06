@@ -3,6 +3,7 @@ import os
 
 import markdown2
 from jinja2 import FileSystemLoader, Environment
+from livereload import Server
 
 
 def load_text_from_file(filepath):
@@ -11,7 +12,7 @@ def load_text_from_file(filepath):
         return text
 
 
-if __name__ == "__main__":
+def make_site():
     json_config = json.loads(load_text_from_file("config.json"))
     articles = json_config["articles"]
     topics = {topic["slug"]: topic["title"] for topic in json_config["topics"]}
@@ -38,3 +39,9 @@ if __name__ == "__main__":
     index_template = environment.get_template("index.html")
     index_template_stream = index_template.stream(articles=articles)
     index_template_stream.dump("output/index.html")
+
+
+if __name__ == "__main__":
+    server = Server()
+    server.watch("templates/*.html", make_site)
+    server.serve(root="output/")
