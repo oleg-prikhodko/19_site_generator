@@ -25,7 +25,7 @@
             <li><a href="#">{{ topic.title|e }}</a></li>
             <ul>
                 {% for article in topic.articles %}
-                <li><a href="{{ article.url }}">{{ article.title|e }}</a></li>
+                <li><a href="{{ article.url|e }}">{{ article.title|e }}</a></li>
                 {% endfor %}
             </ul>
             {% endfor %}
