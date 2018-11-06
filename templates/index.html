@@ -6,12 +6,14 @@
 {% block content %}
 <ul>
     {% for topic in topics %}
-    <li><a href="#">{{ topic.title|e }}</a></li>
-    <ul>
-        {% for article in topic.articles %}
-        <li><a href="{{ article.url|e }}">{{ article.title|e }}</a></li>
-        {% endfor %}
-    </ul>
+    <li>
+        {{ topic.title|e }}
+        <ul>
+            {% for article in topic.articles %}
+            <li><a href="{{ article.url|e }}">{{ article.title|e }}</a></li>
+            {% endfor %}
+        </ul>
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}
