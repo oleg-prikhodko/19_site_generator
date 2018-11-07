@@ -12,10 +12,10 @@
     <ul>
         {% for topic in topics %}
         <li>
-            {{ topic.title|e }}
+            {{ topic.title }}
             <ul>
                 {% for article in topic.articles %}
-                <li><a href="{{ article.url|urlencode }}">{{ article.title|e }}</a></li>
+                <li><a href="{{ article.url }}">{{ article.title }}</a></li>
                 {% endfor %}
             </ul>
         </li>

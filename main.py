@@ -21,7 +21,9 @@ def make_site():
     topics = json_config["topics"]
     topic_titles = {topic["slug"]: topic["title"] for topic in topics}
 
-    environment = Environment(loader=FileSystemLoader("templates"))
+    environment = Environment(
+        loader=FileSystemLoader("templates"), autoescape=True
+    )
     article_template = environment.get_template("article.html")
 
     if not os.path.exists(OUTPUT_DIRNAME):
