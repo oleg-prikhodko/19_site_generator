@@ -1,8 +1,15 @@
 {% extends "base.html" %}
-{% block title %}{{ name }}{% endblock %}
-{% block breadcrumb %}
-<li class="breadcrumb-item"><a href="index.html">Главная</a></li>
-<li class="breadcrumb-item"><a href="#">{{ topic|e }}</a></li>
-<li class="breadcrumb-item active" aria-current="page">{{ name|e }}</li>
+
+{% block title %}
+    {{ name }}
 {% endblock %}
-{% block content %}{{ content }}{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="index.html">Главная</a></li>
+    <li class="breadcrumb-item"><a href="#">{{ topic|e }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ name|e }}</li>
+{% endblock %}
+
+{% block content %}
+    {{ content }}
+{% endblock %}

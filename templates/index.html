@@ -1,19 +1,24 @@
 {% extends "base.html" %}
-{% block title %}Энциклопедия Devman{% endblock %}
-{% block breadcrumb %}
-<li class="breadcrumb-item active"><a href="index.html">Главная</a></li>
+
+{% block title %}
+    Энциклопедия Devman
 {% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active"><a href="index.html">Главная</a></li>
+{% endblock %}
+
 {% block content %}
-<ul>
-    {% for topic in topics %}
-    <li>
-        {{ topic.title|e }}
-        <ul>
-            {% for article in topic.articles %}
-            <li><a href="{{ article.url|urlencode }}">{{ article.title|e }}</a></li>
-            {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for topic in topics %}
+        <li>
+            {{ topic.title|e }}
+            <ul>
+                {% for article in topic.articles %}
+                <li><a href="{{ article.url|urlencode }}">{{ article.title|e }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
