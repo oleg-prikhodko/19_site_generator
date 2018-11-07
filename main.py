@@ -21,6 +21,12 @@ def make_site():
     topics = json_config["topics"]
     topic_titles = {topic["slug"]: topic["title"] for topic in topics}
 
+    environment = Environment(loader=FileSystemLoader("templates"))
+    article_template = environment.get_template("article.html")
+
+    if not os.path.exists(OUTPUT_DIRNAME):
+        os.mkdir(OUTPUT_DIRNAME)
+
     for article in articles:
         markdown_path = "articles/{}".format(article["source"])
         markdown_content = load_text_from_file(markdown_path)
@@ -30,14 +36,9 @@ def make_site():
         article["url"] = "{}.html".format(filename)
         article["topic"] = topic_titles.get(article["topic"])
 
-        environment = Environment(loader=FileSystemLoader("templates"))
-        article_template = environment.get_template("article.html")
         article_template_stream = article_template.stream(
             name=article["title"], topic=article["topic"], content=html_content
         )
-
-        if not os.path.exists(OUTPUT_DIRNAME):
-            os.mkdir(OUTPUT_DIRNAME)
         article_template_stream.dump(
             "{}/{}.html".format(OUTPUT_DIRNAME, filename)
         )
