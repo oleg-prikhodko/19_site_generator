@@ -36,10 +36,13 @@ def make_site():
         filename, _ = os.path.splitext(os.path.basename(article["source"]))
 
         article["url"] = "{}.html".format(filename)
-        article["topic"] = topic_titles.get(article["topic"])
+        topic_title = topic_titles.get(article["topic"])
 
         article_template_stream = article_template.stream(
-            name=article["title"], topic=article["topic"], content=html_content
+            name=article["title"],
+            topic=topic_title,
+            topic_slug=article["topic"],
+            content=html_content,
         )
         article_template_stream.dump(
             "{}/{}.html".format(OUTPUT_DIRNAME, filename)
@@ -49,7 +52,7 @@ def make_site():
         topic["articles"] = [
             article
             for article in articles
-            if article["topic"] == topic["title"]
+            if article["topic"] == topic["slug"]
         ]
 
     index_template = environment.get_template("index.html")
