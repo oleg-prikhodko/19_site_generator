@@ -6,7 +6,7 @@
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="index.html">Главная</a></li>
-    <li class="breadcrumb-item"><a href="#">{{ topic }}</a></li>
+    <li class="breadcrumb-item"><a href="index.html#{{ topic_slug }}">{{ topic }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ name }}</li>
 {% endblock %}
 

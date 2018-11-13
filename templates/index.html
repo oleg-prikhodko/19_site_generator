@@ -12,7 +12,7 @@
     <ul>
         {% for topic in topics %}
         <li>
-            {{ topic.title }}
+            <a href="#{{ topic.slug }}">{{ topic.title }}</a>
             <ul>
                 {% for article in topic.articles %}
                 <li><a href="{{ article.url }}">{{ article.title }}</a></li>
